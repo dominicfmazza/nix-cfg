@@ -17,7 +17,7 @@
     # inputs.nix-colors.homeManagerModules.default
 
     # You can also split up your configuration and import pieces of it here:
-    ./default/init.nix
+    ./nvim/default.nix
   ];
 
   nixpkgs = {
