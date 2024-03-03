@@ -1,2 +1,3 @@
 fullos-cmd.sh
 homemgr-command.sh
+./nixos/hardware-configuration.nix
