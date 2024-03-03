@@ -53,6 +53,14 @@
         modules = [
           # > Our main nixos configuration file <
           ./nixos/configuration.nix
+          ./nixos/server/server.nix
+        ];
+      };
+      parallelotron = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          ./nixos/configuration.nix
+          ./nixos/parallels/parallels.nix
         ];
       };
     };
@@ -60,7 +68,7 @@
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#your-username@your-hostname'
     homeConfigurations = {
-      "dominicfmazza@servotron" = home-manager.lib.homeManagerConfiguration {
+      "dominicfmazza" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
