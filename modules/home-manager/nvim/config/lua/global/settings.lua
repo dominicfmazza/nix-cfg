@@ -18,8 +18,11 @@ opt.relativenumber = true
 opt.number = true
 opt.signcolumn = "yes:2"
 
--- Set leader key
+local map = vim.api.nvim_set_keymap
+local silent = { silent = true, noremap = true }
+map("", "<Space>", "<Nop>", silent)
 g.mapleader = " "
+g.maplocalleader = " "
 
 -- Color Scheme Settings
 vim.cmd("syntax enable")

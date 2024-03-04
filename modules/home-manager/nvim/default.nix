@@ -8,7 +8,8 @@
 	vimdiffAlias = true;
 	withPython3 = true;
 	plugins = with pkgs.vimPlugins; [
-          nvim-treesitter.withAllGrammars
+	  # hotkey window
+	  legendary-nvim
 	  # autocompletion
 	  cmp-nvim-lsp
           cmp-buffer
@@ -18,8 +19,6 @@
           nvim-cmp
           lspkind-nvim
 	  
-	  # hotkey window
-	  legendary-nvim
 	];
   
 
