@@ -1,1 +1,2 @@
-require("legend")
+require("plugins.legend")
+require("plugins.catppuccin")

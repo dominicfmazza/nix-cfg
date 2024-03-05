@@ -12,13 +12,14 @@
 	  legendary-nvim
 	  # autocompletion
 	  cmp-nvim-lsp
-          cmp-buffer
-          cmp-path
-          cmp-cmdline
-          cmp-nvim-lsp-signature-help
-          nvim-cmp
-          lspkind-nvim
+      cmp-buffer
+      cmp-path
+      cmp-cmdline
+      cmp-nvim-lsp-signature-help
+      nvim-cmp
+      lspkind-nvim
 	  
+      catppuccin-nvim
 	];
   
 
