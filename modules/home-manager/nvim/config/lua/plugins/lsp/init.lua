@@ -1,12 +1,15 @@
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 local lspconfig = require('lspconfig')
+local wk = require("which-key")
 
-require("legendary").keymaps({
-    { '<space>e', vim.diagnostic.open_float, mode = { 'n' } },
-    { '[d',       vim.diagnostic.goto_prev,  mode = { 'n' } },
-    { ']d',       vim.diagnostic.goto_next,  mode = { 'n' } },
-    { '<space>q', vim.diagnostic.setloclist, mode = { 'n' } }, })
+wk.register({
+    l = {
+        name = "+lsp",
+        d = { vim.diagnostic.open_float },
+        q = { vim.diagnostic.setloclist },
+    },
+})
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
@@ -19,34 +22,25 @@ vim.api.nvim_create_autocmd('LspAttach', {
         -- Buffer local mappings.
         -- See `:help vim.lsp.*` for documentation on any of the below functions
         local opts = { buffer = ev.buf }
-        require("legendary").keymaps({
-            { 'gD',        vim.lsp.buf.declaration,             opts = opts, mode = { 'n' } },
-            { 'gd',        vim.lsp.buf.definition,              opts = opts, mode = { 'n' } },
-            { 'K',         vim.lsp.buf.hover,                   opts = opts, mode = { 'n' } },
-            { 'gi',        vim.lsp.buf.implementation,          opts = opts, mode = { 'n' } },
-            { '<C-k>',     vim.lsp.buf.signature_help,          opts = opts, mode = { 'n' } },
-            { '<space>wa', vim.lsp.buf.add_workspace_folder,    opts = opts, mode = { 'n' } },
-            { '<space>wr', vim.lsp.buf.remove_workspace_folder, opts = opts, mode = { 'n' } },
-            {
-                '<space>wl',
-                function()
-                    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-                end,
-                opts = opts,
-                mode = { 'n' }
-            },
-            { '<space>D',  vim.lsp.buf.type_definition, opts = opts, mode = { 'n' } },
-            { '<space>rn', vim.lsp.buf.rename,          opts = opts, mode = { 'n' } },
-            { '<space>ca', vim.lsp.buf.code_action,     opts = opts, mode = { 'n', 'v' } },
-            { 'gr',        vim.lsp.buf.references,      opts = opts, mode = { 'n' } },
-            {
-                '<space>f',
-                function()
+        wk.register({
+            l = {
+                D = { vim.lsp.buf.declaration, "LSP: Goto declaration" },
+                d = { vim.lsp.buf.definition, "LSP: Goto implementation" },
+                i = { vim.lsp.buf.implementation, "LSP: Goto declaration" },
+                r = { vim.lsp.buf.rename, "LSP: Rename" },
+                R = { vim.lsp.buf.references, "LSP: References" },
+                a = { vim.lsp.buf.code_action, "LSP: Code Action" },
+                t = { vim.lsp.buf.type_definition, "LSP: Type Definition" },
+                f = { function()
                     vim.lsp.buf.format { async = true }
                 end,
-                opts = opts,
-                mode = { 'n' }
-            } })
+                    "LSP: Format" },
+            },
+        })
+        wk.register({
+            K         = { vim.lsp.buf.hover, "LSP: Hover" },
+            ["<C-k>"] = { vim.lsp.buf.signature_help, "LSP: Signature Help" },
+        })
     end,
 })
 
@@ -63,56 +57,98 @@ end
 -- Set up servers based on other configs
 require("plugins.lsp.luals")
 
--- luasnip setup
-local luasnip = require 'luasnip'
 
--- nvim-cmp setup
-local cmp = require 'cmp'
+-- Nvim-cmp Setup
+local has_words_before = function()
+	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
 
-require("legendary").keymaps({
-    { '<C-u>',     cmp.mapping.scroll_docs(-4) },
-    { '<C-d>',     cmp.mapping.scroll_docs(4) },
-    { '<C-Space>', cmp.mapping.complete() },
-    { '<CR>', cmp.mapping.confirm {
-        behavior = cmp.ConfirmBehavior.Replace,
-        select = true,
-    }
-    },
-    {
-        '<Tab>',
-        cmp.mapping(function(fallback)
-                if cmp.visible() then
-                    cmp.select_next_item()
-                elseif luasnip.expand_or_jumpable() then
-                    luasnip.expand_or_jump()
-                else
-                    fallback()
-                end
-            end,
-            { 'i', 's' })
-    },
-    {
-        '<S-Tab>',
-        cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-                luasnip.jump(-1)
-            else
-                fallback()
-            end
-        end, { 'i', 's' })
-    },
+local cmp = require("cmp")
+local luasnip = require("luasnip")
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+local lspkind = require("lspkind")
+
+cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
+
+cmp.setup({
+	completion = {
+		completeopt = "menu,menuone,noselect",
+	},
+	snippet = {
+		expand = function(args)
+			require("luasnip").lsp_expand(args.body)
+		end,
+	},
+	window = {
+		completion = cmp.config.window.bordered(),
+		documentation = cmp.config.window.bordered(),
+	},
+	mapping = {
+		["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
+		["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
+		["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+		["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+		["<C-e>"] = cmp.mapping({
+			i = cmp.mapping.abort(),
+			c = cmp.mapping.close(),
+		}),
+		["<CR>"] = cmp.mapping.confirm({ select = true }),
+		["<Tab>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_next_item()
+			elseif luasnip.expand_or_jumpable() then
+				luasnip.expand_or_jump()
+			elseif has_words_before() then
+				cmp.complete()
+			else
+				fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
+			end
+		end, { "i", "s" }),
+		["<S-Tab>"] = cmp.mapping(function()
+			if cmp.visible() then
+				cmp.select_prev_item()
+			elseif luasnip.jumpable(-1) then
+				luasnip.jump(-1)
+			end
+		end, { "i", "s" }),
+	},
+	sources = cmp.config.sources({
+		{ name = "nvim_lsp" },
+		{ name = "nvim_lsp_signature_help" },
+		{ name = "luasnip" },
+	}, {
+		{ name = "buffer" },
+	}),
+	formatting = {
+		format = lspkind.cmp_format(),
+	},
+	experimental = {
+		ghost_text = {
+			hl_group = "Comment",
+		},
+	},
 })
 
-cmp.setup {
-    snippet = {
-        expand = function(args)
-            luasnip.lsp_expand(args.body)
-        end,
-    },
-    sources = {
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' },
-    },
-}
+-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline("/", {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = {
+		{ name = "buffer" },
+	},
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(":", {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = cmp.config.sources({
+		{ name = "path" },
+	}, {
+		{
+			name = "cmdline",
+			option = {
+				ignore_cmds = { "Man", "!" },
+			},
+		},
+	}),
+})
