@@ -6,5 +6,5 @@ require("legendary").setup({
 })
 
 require("legendary").keymaps({
-	{ "<leader>", ":Legendary<cr>", opts = { silent = true }, description = "Show legendary" },
+	{ "<leader>fk", ":Legendary<cr>", opts = { silent = true }, description = "Show legendary" },
 })
