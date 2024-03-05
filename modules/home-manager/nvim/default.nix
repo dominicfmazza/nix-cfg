@@ -1,6 +1,7 @@
 { config, pkgs, ...}:
 {
   programs.neovim = {
+    
   	enable = true;
 	defaultEditor = true;
 	viAlias = true;
@@ -15,6 +16,7 @@
 	  legendary-nvim
 
 	  # autocompletion
+      nvim-lspconfig
 	  cmp-nvim-lsp
       cmp-buffer
       cmp-path
@@ -22,6 +24,8 @@
       cmp-nvim-lsp-signature-help
       nvim-cmp
       lspkind-nvim
+      luasnip
+      cmp_luasnip
 
 	  # colorscheme
       catppuccin-nvim
@@ -35,8 +39,11 @@
 
       # bufferline
       barbar-nvim
+      
+      # treesitter
+      (nvim-treesitter.withPlugins (plugins: with plugins; [ c nix cpp markdown cuda json lua ]))
 
-      nvim-treesitter.withPlugins (plugins: with plugins; [ c nix cpp markdown cuda json lua ])
+
 	];
   
 
