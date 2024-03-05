@@ -36,7 +36,7 @@
       # bufferline
       barbar-nvim
 
-      nvim-treesitter.withPlugins (p: [ p.c p.nix p.cpp p.markdown p.cuda p.json p.lua ])
+      nvim-treesitter.withPlugins (plugins: with plugins; [ c nix cpp markdown cuda json lua ])
 	];
   
 
