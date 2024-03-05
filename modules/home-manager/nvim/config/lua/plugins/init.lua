@@ -1,4 +1,4 @@
-require("plugins.legend")
+require("plugins.keybinds")
 require("plugins.catppuccin")
 require("plugins.telescope")
 require("plugins.dressing")

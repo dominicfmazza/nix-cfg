@@ -12,7 +12,8 @@
       plenary-nvim
       nvim-web-devicons
 	  
-      # hotkey window
+      # keybinds
+      which-key-nvim
 	  legendary-nvim
 
 	  # autocompletion
