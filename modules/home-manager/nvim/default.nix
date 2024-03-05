@@ -8,6 +8,8 @@
 	vimdiffAlias = true;
 	withPython3 = true;
 	plugins = with pkgs.vimPlugins; [
+      plenary-nvim
+      nvim-web-devicons
 	  # hotkey window
 	  legendary-nvim
 	  # autocompletion
@@ -18,8 +20,12 @@
       cmp-nvim-lsp-signature-help
       nvim-cmp
       lspkind-nvim
-	  
+
+	  # colorscheme
       catppuccin-nvim
+
+      # telescope
+      telescope-nvim
 	];
   
 
@@ -32,6 +38,10 @@
         nil
         nixpkgs-fmt
         statix
+        # telescope addons
+        ripgrep
+        # git integration
+        lazygit
       ];
   };
     xdg.configFile.nvim = {

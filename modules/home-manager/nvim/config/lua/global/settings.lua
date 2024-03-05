@@ -26,6 +26,7 @@ g.maplocalleader = " "
 
 -- Color Scheme Settings
 vim.cmd("syntax enable")
+vim.cmd("colorscheme catppuccin-macchiato")
 opt.background = "dark"
 
 -- Movement keybinds
