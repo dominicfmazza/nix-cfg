@@ -28,6 +28,9 @@
       luasnip
       cmp_luasnip
 
+      # autopairs
+      nvim-autopairs
+
 	  # colorscheme
       catppuccin-nvim
 
