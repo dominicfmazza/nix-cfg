@@ -10,8 +10,10 @@
 	plugins = with pkgs.vimPlugins; [
       plenary-nvim
       nvim-web-devicons
-	  # hotkey window
+	  
+      # hotkey window
 	  legendary-nvim
+
 	  # autocompletion
 	  cmp-nvim-lsp
       cmp-buffer
@@ -26,6 +28,15 @@
 
       # telescope
       telescope-nvim
+      dressing-nvim
+
+      # statusline
+      lualine-nvim
+
+      # bufferline
+      barbar-nvim
+
+      nvim-treesitter.withPlugins (p: [ p.c p.nix p.cpp p.markdown p.cuda p.json p.lua ])
 	];
   
 

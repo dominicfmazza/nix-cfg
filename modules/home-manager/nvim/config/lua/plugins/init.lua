@@ -1,3 +1,6 @@
 require("plugins.legend")
 require("plugins.catppuccin")
 require("plugins.telescope")
+require("plugins.dressing")
+require("plugins.lualine")
+require("plugins.barbar")
