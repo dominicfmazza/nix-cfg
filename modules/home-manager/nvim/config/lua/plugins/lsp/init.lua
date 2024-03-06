@@ -6,8 +6,8 @@ local wk = require("which-key")
 wk.register({
     l = {
         name = "+lsp",
-        d = { vim.diagnostic.open_float },
-        q = { vim.diagnostic.setloclist },
+        d = { vim.diagnostic.open_float, "LSP: Open Diagnostics Float" },
+        q = { vim.diagnostic.setloclist, "LSP: Set Loclist" },
     }},
     {prefix = "<leader>"}
 )
