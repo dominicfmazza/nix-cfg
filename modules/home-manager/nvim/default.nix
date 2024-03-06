@@ -50,6 +50,8 @@
       # nui 
       nui-nvim
 
+      # file tree
+      neo-tree-nvim
 	];
   
 
