@@ -52,6 +52,9 @@
 
       # file tree
       neo-tree-nvim
+
+      # toggleterm
+      toggleterm-nvim
 	];
   
 
