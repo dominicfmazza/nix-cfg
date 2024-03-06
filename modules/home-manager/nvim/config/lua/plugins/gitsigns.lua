@@ -28,6 +28,6 @@ wk.register({
 )
 
 wk.register({
-    ["]g"] = { function() require("gitsigns").next_hunk() end, desc = "Next Git hunk" },
-    ["[g"] = { function() require("gitsigns").prev_hunk() end, desc = "Previous Git hunk" },
+    ["]g"] = { function() require("gitsigns").next_hunk() end, "Next Hunk" },
+    ["[g"] = { function() require("gitsigns").prev_hunk() end, "Previous Hunk" },
 })
