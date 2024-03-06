@@ -55,6 +55,9 @@
 
       # toggleterm
       toggleterm-nvim
+
+      # in buffer git actions
+      gitsigns-nvim
 	];
   
 
