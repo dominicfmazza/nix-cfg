@@ -10,4 +10,7 @@ require("which-key").setup()
 local wk = require("which-key")
 wk.register({
     fk = { "<cmd>Legendary<cr>", "Telescope: Legendary" },
+    w = { "<cmd>w<cr>", "Save"},
+    q = { "<cmd>q<cr>", "Quit"},
+    c = { "<cmd>BufferClose<cr>", "Close"},
 }, { prefix = "<leader>" })
