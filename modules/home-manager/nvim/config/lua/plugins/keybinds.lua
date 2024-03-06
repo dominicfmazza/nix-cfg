@@ -12,5 +12,5 @@ wk.register({
     fk = { "<cmd>Legendary<cr>", "Telescope: Legendary" },
     w = { "<cmd>w<cr>", "Save"},
     q = { "<cmd>q<cr>", "Quit"},
-    c = { "<cmd>BufferClose<cr>", "Close"},
+    c = { "<cmd>close<cr>", "Close"},
 }, { prefix = "<leader>" })
