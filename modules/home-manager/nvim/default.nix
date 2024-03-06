@@ -47,6 +47,8 @@
       # treesitter
       (nvim-treesitter.withPlugins (plugins: with plugins; [ c nix cpp markdown cuda json lua ]))
 
+      # nui 
+      nui-nvim
 
 	];
   
