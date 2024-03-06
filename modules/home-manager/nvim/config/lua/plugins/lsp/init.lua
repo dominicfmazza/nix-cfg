@@ -9,6 +9,7 @@ wk.register({
         d = { vim.diagnostic.open_float },
         q = { vim.diagnostic.setloclist },
     },
+    {prefix = "<leader>"}
 })
 
 -- Use LspAttach autocommand to only map the following keys
@@ -21,7 +22,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
         -- Buffer local mappings.
         -- See `:help vim.lsp.*` for documentation on any of the below functions
-        local opts = { buffer = ev.buf }
         wk.register({
             l = {
                 D = { vim.lsp.buf.declaration, "LSP: Goto declaration" },
@@ -35,12 +35,17 @@ vim.api.nvim_create_autocmd('LspAttach', {
                     vim.lsp.buf.format { async = true }
                 end,
                     "LSP: Format" },
-            },
-        })
+            }
+        },
+            {
+                prefix = "<leader>",
+                buffer = ev.buf,
+            }
+        )
         wk.register({
             K         = { vim.lsp.buf.hover, "LSP: Hover" },
             ["<C-k>"] = { vim.lsp.buf.signature_help, "LSP: Signature Help" },
-        })
+        }, {buffer = ev.buf})
     end,
 })
 
