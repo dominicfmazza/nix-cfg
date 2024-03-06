@@ -12,7 +12,10 @@ require("barbar").setup({
             changed = { enabled = true, icon = '~' },
             deleted = { enabled = true, icon = '-' },
         },
-    }
+    },
+    sidebar_filetypes = {
+        ['neo-tree'] = { event = 'BufWipeout' },
+    },
 })
 
 local wk = require("which-key")
