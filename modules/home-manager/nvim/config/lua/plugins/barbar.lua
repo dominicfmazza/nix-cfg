@@ -1,6 +1,6 @@
 require("barbar").setup({
     icons = {
-        buffer_inde = true,
+        buffer_index = true,
         diagnostics = {
             [vim.diagnostic.severity.ERROR] = { enabled = true, icon = 'ﬀ' },
             [vim.diagnostic.severity.WARN] = { enabled = false },
