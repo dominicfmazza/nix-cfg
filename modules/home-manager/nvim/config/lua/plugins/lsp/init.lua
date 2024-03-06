@@ -8,9 +8,9 @@ wk.register({
         name = "+lsp",
         d = { vim.diagnostic.open_float },
         q = { vim.diagnostic.setloclist },
-    },
+    }},
     {prefix = "<leader>"}
-})
+)
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
