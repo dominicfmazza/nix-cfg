@@ -1,7 +1,7 @@
 require("toggleterm").setup({})
-local Terminal  = require('toggleterm.terminal').Terminal
+local Terminal = require('toggleterm.terminal').Terminal
 
-local lazygit = Terminal:new({
+local lazygit  = Terminal:new({
     cmd = "lazygit",
     dir = "git_dir",
     direction = "float",
@@ -24,5 +24,16 @@ function _lazygit_toggle()
 end
 
 local wk = require("which-key")
-wk.register({ g = { name = "+git", g = { "<cmd>lua _lazygit_toggle()<CR>", "Git: LazyGit" } } },
-    { noremap = true, silent = true })
+wk.register({ g = { name = "+git", g = { "<cmd>lua _lazygit_toggle()<CR>", "LazyGit" } } },
+    { noremap = true, silent = true, prefix = "<leader>" })
+wk.register({
+        t = {
+            name = "+terminal",
+            l = { "<cmd>lua _lazygit_toggle()<CR>", "LazyGit" },
+            v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },     -- vertical
+            h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" }, -- horizontal
+            f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },                   -- float
+        }
+    },
+    { noremap = true, silent = true, prefix = "<leader>" }
+)
