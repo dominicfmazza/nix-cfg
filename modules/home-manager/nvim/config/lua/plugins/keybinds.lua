@@ -9,7 +9,7 @@ require("which-key").setup()
 
 local wk = require("which-key")
 wk.register({
-    fk = { "<cmd>Legendary<cr>", "Telescope: Legendary" },
+    fk = { "<cmd>Legendary<cr>", "Find Keybinds" },
     w = { "<cmd>w<cr>", "Save"},
     q = { "<cmd>q<cr>", "Quit"},
     c = { "<cmd>close<cr>", "Close"},
