@@ -59,6 +59,10 @@
 
       # in buffer git actions
       gitsigns-nvim
+
+      # commenting
+      comment-nvim
+      nvim-ts-context-commentstring
 	];
   
 
