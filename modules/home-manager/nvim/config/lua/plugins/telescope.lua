@@ -12,7 +12,8 @@ wk.register({
         end, "Current Buffer" },
         c = { function()
             require("telescope.builtin").grep_string()
-        end, "Find word under cursor" }
+        end, "Find word under cursor" },
+        k = { "<cmd>Legendary<cr>", "Find Keybinds" },
     },
     {
         noremap = true,
