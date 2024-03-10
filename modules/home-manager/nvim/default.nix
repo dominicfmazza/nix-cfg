@@ -89,6 +89,9 @@
         
         # git integration
         lazygit
+
+        # clang
+        llvmPackages_17.clang-unwrapped
       ];
   };
     xdg.configFile.nvim = {
