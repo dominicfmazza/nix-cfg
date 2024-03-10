@@ -66,6 +66,9 @@
 
       # rainbow delimiters
       rainbow-delimiters-nvim
+
+      # indent
+      indent-blankline-nvim
 	];
   
 
