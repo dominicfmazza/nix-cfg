@@ -1,5 +1,5 @@
 require("lspconfig").clangd.setup({
-        root_dir = root_pattern(
+        root_dir = require("lspconfig").root_pattern(
             '.clangd',
             '.clang-tidy',
             '.clang-format',
