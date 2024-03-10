@@ -22,9 +22,26 @@ wk.register({
             S = { function() require("gitsigns").stage_buffer() end, "Stage Buffer" },
             u = { function() require("gitsigns").undo_stage_hunk() end, "Unstage Hunk" },
             d = { function() require("gitsigns").diffthis() end, "View Diff" },
+            b = { function()
+                require("telescope.builtin").git_branches { use_file_path = true }
+            end, "Git branches" },
+            c = { function()
+                require("telescope.builtin").git_commits { use_file_path = true }
+            end,
+                "Git commits (repository)",
+            },
+            C = { function()
+                require("telescope.builtin").git_bcommits { use_file_path = true }
+            end,
+                "Git commits (current file)",
+            },
+            t = { function()
+                require("telescope.builtin").git_status { use_file_path = true }
+            end, "Git status" }
         }
     },
     { prefix = "<leader>" }
+
 )
 
 wk.register({
