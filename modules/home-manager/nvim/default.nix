@@ -63,20 +63,27 @@
       # commenting
       comment-nvim
       nvim-ts-context-commentstring
+
+      # rainbow delimiters
+      rainbow-delimiters-nvim
 	];
   
 
    extraPackages = with pkgs; [
         tree-sitter
         nodejs
+
         # Lua
         lua-language-server
+
         # Nix
         nil
         nixpkgs-fmt
         statix
+        
         # telescope addons
         ripgrep
+        
         # git integration
         lazygit
       ];

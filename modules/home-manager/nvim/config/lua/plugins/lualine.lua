@@ -3,5 +3,6 @@ require("lualine").setup({
     extensions = {
         "neo-tree",
         "toggleterm"
-    }
+    },
+    theme="catppuccin"
 })
